@@ -8,6 +8,9 @@
 h1 {
     text-align: center;
     color: white;
+    margin-bottom: 10px;
+    font-size: 50px;
+    -webkit-text-stroke: 1px black;
 }
 
 body {
@@ -22,12 +25,38 @@ body {
     height: 100%;
 }
 
-header nav ul {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    justify-content: space-around;
+header {
+    margin: 10px 20px;
+    font-family: 'Lobster', sans-serif;
 }
+    header nav ul {
+        border-radius: 20px;
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        justify-content: center;
+        background-color: white;
+        align-items: center;
+    }
+    header nav ul li {
+        border-right: 1px solid gray;
+        margin: 5px 0;
+        padding: 10px;
+        transition: 0.5s;
+    }
+        header nav ul li:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+        header nav ul li:last-child {
+            border-radius: 0 20px 20px 0;
+        }
+    header nav ul li:last-child {
+        border-right: none;
+    }
+    header nav ul li:hover {
+        background-color: #ff649d;
+    }
+    
 
 .grid {
     display: grid;
@@ -37,6 +66,6 @@ header nav ul {
     flex-wrap: wrap
 }
     .grid img {
-        width: 300px;
+        width: 350px;
     }
 
