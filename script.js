@@ -1,1 +1,97 @@
-// JavaScript source code
+const memes = [
+    {
+        src: 'img/cow.jpg',
+        title: 'Корова думает',
+        description: 'Ироничная корова в поле',
+        tags: ['Животные', 'Ирония'],
+        year: 2021,
+        source: 'https://example.com/meme1',
+        rating: 34
+    },
+    {
+        src: 'img/kitty_fire.jpg',
+        title: 'Кот и огонь',
+        description: 'Кот на фоне пожара',
+        tags: ['Кошки', 'Абсурд'],
+        year: 2020,
+        source: 'https://example.com/meme2',
+        rating: 128
+    },
+    {
+        src: 'img/qiwi.jpg',
+        title: 'Киви-банкомат',
+        description: 'Киви, который выглядит как банкомат',
+        tags: ['Другое', 'Сюрреализм'],
+        year: 2019,
+        source: 'https://example.com/meme3',
+        rating: 47
+    },
+    {
+        src: 'img/kittie_bubbles.jpg',
+        title: 'Кот и пузыри',
+        description: 'Котенок играет с мыльными пузырями',
+        tags: ['Кошки', 'Милота'],
+        year: 2022,
+        source: 'https://example.com/meme4',
+        rating: 88
+    },
+    {
+        src: 'img/cow_chuvash.jpg',
+        title: 'Чувашская корова',
+        description: 'Корова с традиционным головным убором',
+        tags: ['Животные', 'Культура'],
+        year: 2023,
+        source: 'https://example.com/meme5',
+        rating: 72
+    },
+    {
+        src: 'img/goat.jpg',
+        title: 'Козел с характером',
+        description: 'Козел, позирующий как босс',
+        tags: ['Животные', 'Ирония'],
+        year: 2020,
+        source: 'https://example.com/meme6',
+        rating: 39
+    },
+    {
+        src: 'img/cats.jpg',
+        title: 'Кошачья банда',
+        description: 'Группа котов, как будто собралась на собрание',
+        tags: ['Кошки', 'Юмор'],
+        year: 2018,
+        source: 'https://example.com/meme7',
+        rating: 103
+    },
+    {
+        src: 'img/sleepy_kitties.jpg',
+        title: 'Сонные котята',
+        description: 'Котята спят в милой кучке',
+        tags: ['Кошки', 'Милота'],
+        year: 2021,
+        source: 'https://example.com/meme8',
+        rating: 95
+    }
+];
+
+const grid = document.querySelector('.grid');
+
+memes.forEach(meme => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
+        <img src="${meme.src}" alt="${meme.title}" />
+        <div class="rating">
+            <img src="svg/plus.svg" alt="+" width="12" height="12" />
+            <span>${meme.rating}</span>
+            <img src="svg/minus.svg" alt="-" width="12" height="12" />
+        </div>
+        <p><strong>${meme.title}</strong></p>
+        <p>${meme.description}</p>
+        <p><em>${meme.tags.join(', ')}</em></p>
+        <p>Год: ${meme.year}</p>
+        <p>Источник: <a href="${meme.source}" target="_blank">ссылка</a></p>
+    `;
+
+    grid.appendChild(card);
+});
