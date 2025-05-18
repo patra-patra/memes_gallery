@@ -1,8 +1,20 @@
-﻿* {
+﻿@font-face {
+    font-family: 'Lobster';
+    src: url('fonts/Lobster-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
     padding: 0;
     margin: 0;
     font-family: 'Impact';
-    box-sizing: content-box;
+    box-sizing: border-box;
+}
+
+a {
+    all: unset;
 }
 
 h1 {
@@ -27,45 +39,95 @@ body {
 
 header {
     margin: 10px 20px;
-    font-family: 'Lobster', sans-serif;
 }
-    header nav ul {
-        border-radius: 20px;
-        display: flex;
-        flex-direction: row;
-        list-style-type: none;
-        justify-content: center;
-        background-color: white;
-        align-items: center;
-    }
-    header nav ul li {
+
+.menu {
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+    .menu li {
+        width: calc(100% / 4);
         border-right: 1px solid gray;
-        margin: 5px 0;
+        margin: 3px 0;
         padding: 10px;
-        transition: 0.5s;
+        transition: 0.3s;
+        position: relative;
+        text-align: center;
     }
-        header nav ul li:first-child {
+        .menu li:first-child {
             border-radius: 20px 0 0 20px;
         }
-        header nav ul li:last-child {
+        .menu li:last-child {
             border-radius: 0 20px 20px 0;
         }
-    header nav ul li:last-child {
-        border-right: none;
-    }
-    header nav ul li:hover {
-        background-color: #ff649d;
-    }
-    
+        .menu li:last-child {
+            border-right: none;
+        }
+        .menu li:hover {
+            background-color: #ff649d;
+            color: white;
+        }
+        .menu li > ul {
+            background-color: #00aec4;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+            justify-content: center;
+            background-color: white;
+            align-items: center;
+            display: none;
+            border: none;
+        }
+        .menu li:hover ul {
+            display: block;
+            width: 100%;
+            background-color: #00aec4;
+            position: absolute;
+            top: 60%;
+            left: 0;
+            z-index: -1;
+            border-radius: 0 0 30px 30px;
+            transition: 0.8s;
+        }
+        .menu li:hover > ul li {
+            text-align: center;
+            background-color: #00aec4;
+            border: none;
+            border-radius: 0;
+            width: 100%;
+            margin: 0;
+            transition: 0.5s;
+        }
+            .menu li:hover > ul li:first-child {
+                padding-top: 20px;
+            }
+            .menu li:hover > ul li:last-child {
+                border-radius: 0 0 30px 30px;
+            }
+            .menu li:hover > ul li:hover {
+                background-color: white;
+                color: black;
+                width: 100%;
+            }
+
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-rows: 300px;
     gap: 5px;
     flex-wrap: wrap
 }
-    .grid img {
-        width: 350px;
-    }
+.grid img {
+    width: 350px;
+}
 
