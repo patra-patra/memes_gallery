@@ -59,7 +59,6 @@ header {
     padding: 0 4px;
     box-shadow: 0px 0px 10px #9b9b9b;
 }
-
     .menu li {
         width: calc(100% / 4);
         border-right: 1px solid gray;
@@ -138,7 +137,40 @@ header {
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
+    gap: 20px;
+}
+
+/* При ширине экрана больше 800px */
+@media (min-width: 800px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, 265px); /* Фиксированная ширина карточек */
+        justify-content: start; /* Центрируем карточки */
+    }
+}
+
+@media (max-width: 620px) {
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+        .menu li {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid gray;
+        }
+            .menu li:last-child {
+                border-bottom: none;
+                border-radius: 0 0 20px 20px;
+            }
+            .menu li:first-child {
+                border-radius: 20px 20px 0 0;
+            }
+            .menu li ul {
+                z-index: 5;
+            }
+
+                
+
 }
 
 .card {
@@ -148,8 +180,11 @@ header {
     text-align: center;
     overflow: hidden;
     box-shadow: 0px 0px 10px #9b9b9b;
-    align-content: center;
     font-family: 'Times New Roman', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%; /* Занимает всю доступную ширину в grid-ячейке */
 }
 
     .card img {
