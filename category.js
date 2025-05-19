@@ -1,4 +1,4 @@
-document.querySelectorAll('.menu li ul li').forEach(item => {
+﻿document.querySelectorAll('.menu li ul li').forEach(item => {
     item.addEventListener('click', () => {
         const category = item.textContent.trim();
         localStorage.setItem('selectedCategory', category);
@@ -25,6 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         filteredMemes.forEach((meme, index) => {
+            // Проверяем сохранённый рейтинг в localStorage
+            const savedRating = localStorage.getItem(`rating_${meme.title}`);
+            if (savedRating !== null) {
+                meme.rating = parseInt(savedRating, 10);
+            }
+
             const card = document.createElement("div");
             card.className = "card";
 
@@ -46,15 +52,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const valueSpan = ratingDiv.querySelector('.value');
             const plusBtn = ratingDiv.querySelector('.plus');
             const minusBtn = ratingDiv.querySelector('.minus');
+            const meme = filteredMemes[index];
+
+            function updateRating(newRating) {
+                valueSpan.textContent = newRating;
+                localStorage.setItem(`rating_${meme.title}`, newRating); // Сохраняем локально
+            }
 
             plusBtn.addEventListener('click', () => {
-                memes[index].rating++;
-                valueSpan.textContent = memes[index].rating;
+                meme.rating++;
+                updateRating(meme.rating);
             });
 
             minusBtn.addEventListener('click', () => {
-                memes[index].rating--;
-                valueSpan.textContent = memes[index].rating;
+                if (meme.rating > 0) {
+                    meme.rating--;
+                    updateRating(meme.rating);
+                }
             });
         });
     }
