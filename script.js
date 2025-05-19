@@ -1,97 +1,64 @@
-const memes = [
-    {
-        src: 'img/cow.jpg',
-        title: 'Корова думает',
-        description: 'Ироничная корова в поле',
-        tags: ['Животные', 'Ирония'],
-        year: 2021,
-        source: 'https://example.com/meme1',
-        rating: 34
-    },
-    {
-        src: 'img/kitty_fire.jpg',
-        title: 'Кот и огонь',
-        description: 'Кот на фоне пожара',
-        tags: ['Кошки', 'Абсурд'],
-        year: 2020,
-        source: 'https://example.com/meme2',
-        rating: 128
-    },
-    {
-        src: 'img/qiwi.jpg',
-        title: 'Киви-банкомат',
-        description: 'Киви, который выглядит как банкомат',
-        tags: ['Другое', 'Сюрреализм'],
-        year: 2019,
-        source: 'https://example.com/meme3',
-        rating: 47
-    },
-    {
-        src: 'img/kittie_bubbles.jpg',
-        title: 'Кот и пузыри',
-        description: 'Котенок играет с мыльными пузырями',
-        tags: ['Кошки', 'Милота'],
-        year: 2022,
-        source: 'https://example.com/meme4',
-        rating: 88
-    },
-    {
-        src: 'img/cow_chuvash.jpg',
-        title: 'Чувашская корова',
-        description: 'Корова с традиционным головным убором',
-        tags: ['Животные', 'Культура'],
-        year: 2023,
-        source: 'https://example.com/meme5',
-        rating: 72
-    },
-    {
-        src: 'img/goat.jpg',
-        title: 'Козел с характером',
-        description: 'Козел, позирующий как босс',
-        tags: ['Животные', 'Ирония'],
-        year: 2020,
-        source: 'https://example.com/meme6',
-        rating: 39
-    },
-    {
-        src: 'img/cats.jpg',
-        title: 'Кошачья банда',
-        description: 'Группа котов, как будто собралась на собрание',
-        tags: ['Кошки', 'Юмор'],
-        year: 2018,
-        source: 'https://example.com/meme7',
-        rating: 103
-    },
-    {
-        src: 'img/sleepy_kitties.jpg',
-        title: 'Сонные котята',
-        description: 'Котята спят в милой кучке',
-        tags: ['Кошки', 'Милота'],
-        year: 2021,
-        source: 'https://example.com/meme8',
-        rating: 95
+document.querySelectorAll('.menu li ul li').forEach(item => {
+    item.addEventListener('click', () => {
+        const category = item.textContent.trim();
+        localStorage.setItem('selectedCategory', category);
+        window.location.href = 'category.html';
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPage = window.location.pathname;
+
+    if (currentPage.includes("category.html")) {
+        const selectedCategory = localStorage.getItem("selectedCategory");
+        const title = document.getElementById("categoryTitle");
+        const grid = document.getElementById("memeGrid");
+
+        if (!selectedCategory || !grid || typeof memes === "undefined") return;
+
+        title.textContent = `Категория: ${selectedCategory}`;
+        const filteredMemes = memes.filter(m => m.tags.includes(selectedCategory));
+
+        if (filteredMemes.length === 0) {
+            grid.innerHTML = `<p>Нет мемов в категории "${selectedCategory}".</p>`;
+            return;
+        }
+
+        filteredMemes.forEach((meme, index) => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+                <img src="${meme.src}" alt="${meme.title}">
+                <div class="rating" data-index="${index}">
+                    <button class="minus">−</button>
+                    <span class="value">${meme.rating}</span>
+                    <button class="plus">+</button>
+                </div>
+                <h3>${meme.title}</h3>
+                <p>${meme.description}</p>
+                <small>${meme.year} • ${meme.tags.join(', ')}<br>
+                <a href="${meme.source}" target="_blank">Источник</a></small>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Добавляем обработчики кнопок плюса и минуса
+        document.querySelectorAll('.rating').forEach(ratingDiv => {
+            const index = ratingDiv.getAttribute('data-index');
+            const valueSpan = ratingDiv.querySelector('.value');
+            const plusBtn = ratingDiv.querySelector('.plus');
+            const minusBtn = ratingDiv.querySelector('.minus');
+
+            plusBtn.addEventListener('click', () => {
+                memes[index].rating++;
+                valueSpan.textContent = memes[index].rating;
+            });
+
+            minusBtn.addEventListener('click', () => {
+                memes[index].rating--;
+                valueSpan.textContent = memes[index].rating;
+            });
+        });
     }
-];
-
-const grid = document.querySelector('.grid');
-
-memes.forEach(meme => {
-    const card = document.createElement('div');
-    card.className = 'card';
-
-    card.innerHTML = `
-        <img src="${meme.src}" alt="${meme.title}" />
-        <div class="rating">
-            <img src="svg/plus.svg" alt="+" width="12" height="12" />
-            <span>${meme.rating}</span>
-            <img src="svg/minus.svg" alt="-" width="12" height="12" />
-        </div>
-        <p><strong>${meme.title}</strong></p>
-        <p>${meme.description}</p>
-        <p><em>${meme.tags.join(', ')}</em></p>
-        <p>Год: ${meme.year}</p>
-        <p>Источник: <a href="${meme.source}" target="_blank">ссылка</a></p>
-    `;
-
-    grid.appendChild(card);
 });

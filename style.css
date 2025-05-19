@@ -29,16 +29,13 @@ h1 {
     -webkit-text-stroke: 1px black;
 }
 
-body {
-    background-color: #d2004d;
-}
-
 .container {
     background-color: white;
     border-radius: 20px;
-    margin: 10px 20px; 
+    margin: 10px 20px;
     padding: 20px 40px;
     height: 100%;
+    box-shadow: 0px 0px 10px #9b9b9b;
 }
 
 header {
@@ -56,6 +53,7 @@ header {
     position: relative;
     z-index: 2;
     padding: 0 4px;
+    box-shadow: 0px 0px 10px #9b9b9b;
 }
     .menu li {
         width: calc(100% / 4);
@@ -123,23 +121,28 @@ header {
             }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Автоматическая адаптация */
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 20px;
 }
 
 .card {
+    width: 250px;
     background-color: white;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
     box-shadow: 0px 0px 10px #9b9b9b;
+    font-family: 'Times New Roman', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
     .card img {
         width: 100%;
-        max-height: 200px;
+        height: 160px;
         object-fit: cover;
         border-radius: 8px;
     }
@@ -149,3 +152,24 @@ header {
     align-items: center;
     gap: 4px; /* Расстояние между элементами */
 }
+
+    .rating button {
+        border: none;
+        background-color: #00aec4;
+        color: white;
+        padding: 4px 8px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+        .rating button:hover {
+            background-color: #ff649d;
+        }
+
+    .rating .value {
+        font-weight: bold;
+        font-size: 16px;
+    }
+
