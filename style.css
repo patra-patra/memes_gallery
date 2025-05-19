@@ -148,9 +148,11 @@ header {
     }
 
 .rating {
-    display: inline-flex;
+    display: flex;
+    justify-content: center; 
     align-items: center;
-    gap: 4px; /* Расстояние между элементами */
+    gap: 8px;
+    margin-top: 8px;
 }
 
     .rating button {
