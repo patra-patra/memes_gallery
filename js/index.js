@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${meme.src}" alt="${meme.title}">
             <div class="rating" data-id="${meme.id}">
                 <button class="minus">−</button>
-                <span class="value">${meme.rating}</span>
+                <span class="value star">${meme.rating}</span>
                 <button class="plus">+</button>
             </div>
             <h3>${meme.title}</h3>
@@ -68,11 +68,15 @@ function openModal(meme) {
     modalImage.src = meme.src;
     modalImage.alt = meme.title;
     modalInfo.innerHTML = `
-        <h2>${meme.title}</h2>
-        <p><strong>Рейтинг:</strong> ${meme.rating}</p>
-        <p><strong>Теги:</strong> ${meme.tags.join(', ')}</p>
-        <p><strong>Описание:</strong> ${meme.description || 'Описание отсутствует.'}</p>
-    `;
+            <div class='title_rating'>
+                <h2>${meme.title}</h2>
+                <p class="star"> ${meme.rating}</p>
+            </div>
+            <p><strong>Год:</strong> ${meme.year || 'Не указано'}</p>
+            <p><strong>Теги:</strong> ${meme.tags.join(', ')}</p>
+            <p><strong>Описание:</strong> ${meme.description || 'Описание отсутствует.'}</p>
+            <p><strong>Источник:</strong> <a href="${meme.source}" target="_blank">${meme.source}</a></p>
+        `;
 
     modal.classList.remove("hidden");
 }
