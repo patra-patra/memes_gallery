@@ -1,8 +1,8 @@
-document.querySelectorAll('.menu li ul li').forEach(item => {
-    item.addEventListener('click', () => {
+document.querySelectorAll(".menu li ul li").forEach((item) => {
+    item.addEventListener("click", () => {
         const category = item.textContent.trim();
-        localStorage.setItem('selectedCategory', category);
-        window.location.href = 'category.html';
+        localStorage.setItem("selectedCategory", category);
+        window.location.href = "category.html";
     });
 });
 
@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!selectedCategory || !grid || typeof memes === "undefined") return;
 
         title.textContent = `Категория: ${selectedCategory}`;
-        const filteredMemes = memes.filter(m => m.tags.includes(selectedCategory));
+        const filteredMemes = memes.filter((m) =>
+            m.tags.includes(selectedCategory)
+        );
 
         if (filteredMemes.length === 0) {
             grid.innerHTML = `<p>Нет мемов в категории "${selectedCategory}".</p>`;
@@ -41,18 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Добавляем обработчики кнопок плюса и минуса
-        document.querySelectorAll('.rating').forEach(ratingDiv => {
-            const index = ratingDiv.getAttribute('data-index');
-            const valueSpan = ratingDiv.querySelector('.value');
-            const plusBtn = ratingDiv.querySelector('.plus');
-            const minusBtn = ratingDiv.querySelector('.minus');
+        document.querySelectorAll(".rating").forEach((ratingDiv) => {
+            const index = ratingDiv.getAttribute("data-index");
+            const valueSpan = ratingDiv.querySelector(".value");
+            const plusBtn = ratingDiv.querySelector(".plus");
+            const minusBtn = ratingDiv.querySelector(".minus");
 
-            plusBtn.addEventListener('click', () => {
+            plusBtn.addEventListener("click", () => {
                 memes[index].rating++;
                 valueSpan.textContent = memes[index].rating;
             });
 
-            minusBtn.addEventListener('click', () => {
+            minusBtn.addEventListener("click", () => {
                 memes[index].rating--;
                 valueSpan.textContent = memes[index].rating;
             });
