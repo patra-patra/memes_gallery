@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Галерея мемов</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="top.css" />
-    <link rel="stylesheet" href="hero_section.css" />
-    <link rel="stylesheet" href="easter_egg.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/top.css" />
+    <link rel="stylesheet" href="css/hero_section.css" />
+    <link rel="stylesheet" href="css/easter_egg.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
@@ -67,11 +67,15 @@
             <div id="allMemesGrid" class="grid"></div>
         </div>
     </main>
-
-    <script src="memes.js"></script>
-    <script type="module" src="script.js"></script>
-    <script src="index.js"></script>
-    <script src="category.js"></script>
-
+    <div id="memeModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div id="modalInfo"></div>
+        </div>
+    </div>
+    <script src="js/memes.js"></script>        <!-- данные по списку всех мемов -->
+    <script src="js/script.js"></script>  <!-- установка категории + перенаправление -->
+    <script src="js/index.js"></script>
 </body>
 </html>

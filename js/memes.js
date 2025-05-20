@@ -1,4 +1,4 @@
-export const memes = [
+const memes = [
     {
         src: "img/cow.jpg",
         title: "Корова думает",

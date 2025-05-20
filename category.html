@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Категория мемов</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <header id="head">
@@ -55,8 +55,16 @@
         </div>
     </main>
 
-    <script src="memes.js"></script>
-    <!--<script src="script.js"></script>-->
-    <script src="category.js"></script>
+
+    <div id="memeModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div id="modalInfo"></div>
+        </div>
+    </div>
+
+    <script src="js/memes.js"></script>        <!-- те же данные по мемам -->
+    <script src="js/category.js"></script>
 </body>
 </html>
