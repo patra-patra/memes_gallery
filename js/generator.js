@@ -1,13 +1,11 @@
 // Meme templates
 const memeTemplates = [
-    { id: 'template1', src: 'img/cow.jpg', name: 'Корова думает' },
-    { id: 'template2', src: 'img/spring.jpg', name: 'Весна 2028' },
-    { id: 'template3', src: 'img/lion.jpg', name: 'Лев в тачке' },
-    { id: 'template4', src: 'img/dog_fish.jpg', name: 'Сон собаки' },
-    { id: 'template5', src: 'img/tarhun.jpg', name: 'Тархун-комната' },
-    { id: 'template6', src: 'img/yagami_lite.jpg', name: 'Тест' },
-    { id: 'template7', src: 'img/anime_humor.jpg', name: 'Аниме юмор' },
-    { id: 'template8', src: 'img/cat_shrimp.jpg', name: 'Кот креветка' }
+    { id: 'template1', src: 'img/gen/gr.jpg', name: 'Корова думает' },
+    { id: 'template2', src: 'img/gen/fnaf.jpg"', name: 'Девочка' },
+    { id: 'template3', src: 'img/gen/girl.jpg', name: 'Лев в тачке' },
+    { id: 'template4', src: 'img/gen/travel.jpg', name: 'Сон собаки' },
+    { id: 'template5', src: 'img/gen/turt.jpg', name: 'Тархун-комната' }
+ 
 ];
 
 // DOM Elements
