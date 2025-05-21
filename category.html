@@ -52,6 +52,16 @@
     <main>
         <div class="container">
             <h2 id="categoryTitle">Категория</h2>
+            <div class="filter-container">
+                <button class="filter-button" data-sort="rating">
+                    По рейтингу
+                    <span class="icon">↑</span>
+                </button>
+                <button class="filter-button" data-sort="title">
+                    По алфавиту
+                    <span class="icon">↑</span>
+                </button>
+            </div>
             <div class="grid" id="memeGrid"></div>
         </div>
     </main>
@@ -66,5 +76,6 @@
 
     <script src="js/memes.js"></script>
     <script src="js/category.js"></script>
+    <script src="js/filters.js"></script>
 </body>
 </html>

@@ -74,21 +74,66 @@
                     <li><a href="add-meme.html">Добавить мем</a></li>
                 </ul>
             </nav>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Поиск по названию, описанию или тегам..." />
-                <button id="searchButton">
-                    <img src="svg/search.svg" alt="Поиск" class="search-icon">
-                </button>
-            </div>
         </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Поиск по названию, описанию или тегам..." />
+            <button id="searchButton">
+                <img src="svg/search.svg" alt="Поиск" class="search-icon">
+            </button>
+        </div>
 
         <main>
             <div class="container">
+                <div class="filters-panel">
+                    <div class="filters-header">
+                        <h3>Фильтры и сортировка</h3>
+                        <button class="filter-reset">Сбросить</button>
+                    </div>
+                    <div class="filters-content">
+                        <div class="sort-buttons">
+                            <button class="filter-button" data-sort="rating">
+                                По рейтингу
+                                <span class="icon">↑</span>
+                            </button>
+                            <button class="filter-button" data-sort="title">
+                                По алфавиту
+                                <span class="icon">↑</span>
+                            </button>
+                            <button class="filter-button" data-sort="year">
+                                По году
+                                <span class="icon">↑</span>
+                            </button>
+                        </div>
+                        <div class="filter-options">
+                            <div class="filter-group">
+                                <label>Год:</label>
+                                <select id="yearFilter">
+                                    <option value="">Все годы</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Рейтинг:</label>
+                                <select id="ratingFilter">
+                                    <option value="">Любой рейтинг</option>
+                                    <option value="100">100+</option>
+                                    <option value="50">50+</option>
+                                    <option value="30">30+</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="allMemesGrid" class="grid"></div>
                 <section class="top-section">
                     <h2>Топ мемов</h2>
                     <div class="top-memes-grid"></div>
                 </section>
-                <div id="allMemesGrid" class="grid"></div>
             </div>
         </main>
     </div>
@@ -104,5 +149,6 @@
     <script src="js/index.js"></script>
     <script src="js/script.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/filters.js"></script>
 </body>
 </html>

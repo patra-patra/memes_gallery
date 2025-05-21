@@ -84,43 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".rating").forEach(initializeEasterEgg);
 });
 
-// Easter egg - Nyan Cat Mode
-let lastHoveredCard = null;
-
-document.addEventListener('mouseover', (e) => {
-    const card = e.target.closest('.card');
-    if (card) {
-        lastHoveredCard = card;
-    }
-});
-
-document.addEventListener('mouseout', (e) => {
-    const card = e.target.closest('.card');
-    if (card) {
-        lastHoveredCard = null;
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.code === 'Space' && lastHoveredCard) {
-        e.preventDefault(); // Prevent page scroll
-        
-        // Store original image
-        const img = lastHoveredCard.querySelector('img');
-        const originalSrc = img.src;
-        
-        // Apply Nyan Cat mode
-        lastHoveredCard.classList.add('nyan-mode');
-        img.src = 'img/nyan-cat.gif';
-        
-        // Revert back after 3 seconds
-        setTimeout(() => {
-            lastHoveredCard.classList.remove('nyan-mode');
-            img.src = originalSrc;
-        }, 3000);
-    }
-});
-
 // Disco Mode Easter Egg
 let discoMode = false;
 let discoBall = null;
