@@ -16,6 +16,20 @@
     font-style: normal;
 }
 
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+.header-logo img {
+    height: 100px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+}
+
+
 .generator-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -67,6 +81,7 @@
 .template-section {
     border-right: 1px solid var(--border);
     padding-right: 20px;
+    text-align: center;
 }
 
 .template-section h2 {

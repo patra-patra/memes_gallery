@@ -6,9 +6,6 @@
     font-display: swap;
 }
 
-/* Adding Bangers font for meme-style headings */
-@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
-
 .dela-gothic-one-regular {
     font-family: "Dela Gothic One", sans-serif;
     font-weight: 400;
@@ -228,6 +225,7 @@ header {
     text-align: left;
     background: transparent;
     color: var(--text-color);
+    text-align: center;
 }
 
 .menu li:hover > ul li:first-child {
@@ -258,7 +256,7 @@ header {
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 950px) {
     .menu {
         flex-direction: column;
         align-items: stretch;
@@ -619,7 +617,7 @@ header {
     text-align: justify;
     font-family: 'Poppins', sans-serif;
     opacity: 0;
-    animation: text_fade 2s forwards;
+    animation: text_fade 3s forwards;
     animation-delay: 2s;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     direction: ltr;
@@ -646,10 +644,13 @@ header {
 @keyframes text_fade {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+    }
+    50% {
+        opacity: 50%;
+        transform: translateY(20px);    
     }
     100% {
-        opacity: 1;
+        opacity: 100%;
         transform: translateY(0);
     }
 }
@@ -1037,6 +1038,7 @@ header {
     flex-wrap: nowrap;
 }
 
+
 .filter-options {
     display: flex;
     gap: 20px;
@@ -1330,4 +1332,67 @@ header {
     font-weight: 600;
     display: inline-flex;
     align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .hero_section {
+        display: none;
+    }
+    
+   
+}
+
+
+.hero_section h1 {
+    font-size: clamp(36px, 8vw, 70px);
+    margin: 2vw 0;
+    -webkit-text-stroke: clamp(1px, 0.2vw, 2px) var(--text-color);
+    text-shadow: 
+        clamp(2px, 0.6vw, 4px) clamp(2px, 0.6vw, 4px) 0 var(--text-color),
+        clamp(3px, 1vw, 7px) clamp(3px, 1vw, 7px) 0 rgba(0, 0, 0, 0.2);
+    line-height: 1.1;
+}
+
+.hero_section p {
+    font-size: clamp(14px, 2.5vw, 20px);
+    margin-bottom: clamp(15px, 4vw, 25px);
+    line-height: 1.5;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero_section button {
+    padding: clamp(10px, 2vw, 15px) clamp(20px, 4vw, 30px);
+    font-size: clamp(14px, 2.5vw, 18px);
+    border-radius: clamp(20px, 4vw, 30px);
+}
+
+/* Горизонтальная ориентация для широких экранов */
+@media (min-width: 768px) and (min-aspect-ratio: 1/1) {
+    .hero_section {
+        flex-direction: row;
+        gap: clamp(20px, 5vw, 40px);
+    }
+    
+    .hero_text {
+        text-align: left;
+        margin-left: clamp(20px, 5vw, 40px);
+    }
+    
+    .hero_section p {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+    }
+}
+
+/* Большие экраны - показываем всех котиков */
+
+
+/* Анимации */
+@keyframes cat_wave {
+    0% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.05); }
+    100% { transform: rotate(-5deg) scale(1); }
 }
