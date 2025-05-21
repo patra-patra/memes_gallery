@@ -73,8 +73,10 @@
             </ul>
         </nav>
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Поиск мемов..." />
-            <button id="searchButton">Поиск</button>
+            <input type="text" id="searchInput" placeholder="Поиск по названию, описанию или тегам..." />
+            <button id="searchButton">
+                <img src="svg/search.svg" alt="Поиск" class="search-icon">
+            </button>
         </div>
     </header>
 
@@ -92,6 +94,7 @@
     </div>
     <script src="js/memes.js"></script>        <!-- данные по списку всех мемов -->
     <script src="js/script.js"></script>  <!-- установка категории + перенаправление -->
+    <script src="js/search.js"></script>  <!-- поиск мемов -->
     <script src="js/index.js"></script>
 </body>
 </html>
