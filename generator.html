@@ -6,7 +6,7 @@
     <title>Мемогенератор</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/generator.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <header>
@@ -43,7 +43,16 @@
                     <div class="controls">
                         <div class="text-controls">
                             <input type="text" id="topText" placeholder="Верхний текст">
+                            <div class="position-control">
+                                <label>Положение верхнего текста:</label>
+                                <input type="range" id="topTextPosition" min="-50" max="150" value="10">
+                            </div>
+                            
                             <input type="text" id="bottomText" placeholder="Нижний текст">
+                            <div class="position-control">
+                                <label>Положение нижнего текста:</label>
+                                <input type="range" id="bottomTextPosition" min="-50" max="150" value="90">
+                            </div>
                         </div>
                         
                         <div class="style-controls">
@@ -68,6 +77,16 @@
                             <div class="control-group">
                                 <label>Обводка:</label>
                                 <input type="color" id="strokeColor" value="#000000">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label>Толщина обводки:</label>
+                                <input type="range" id="strokeWidth" min="0" max="20" value="4">
+                            </div>
+
+                            <div class="control-group">
+                                <label>Включить обводку:</label>
+                                <input type="checkbox" id="enableStroke" checked>
                             </div>
                         </div>
                         

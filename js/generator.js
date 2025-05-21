@@ -16,37 +16,86 @@ const ctx = canvas.getContext('2d');
 const templateGrid = document.getElementById('templateGrid');
 const topTextInput = document.getElementById('topText');
 const bottomTextInput = document.getElementById('bottomText');
+const topTextPosition = document.getElementById('topTextPosition');
+const bottomTextPosition = document.getElementById('bottomTextPosition');
 const fontSizeInput = document.getElementById('fontSize');
 const fontFamilySelect = document.getElementById('fontFamily');
 const textColorInput = document.getElementById('textColor');
 const strokeColorInput = document.getElementById('strokeColor');
+const strokeWidthInput = document.getElementById('strokeWidth');
+const enableStrokeCheckbox = document.getElementById('enableStroke');
 const downloadBtn = document.getElementById('downloadBtn');
 const imageUpload = document.getElementById('imageUpload');
 
 let currentImage = null;
 let selectedTemplate = null;
 
-// Initialize canvas size
-canvas.width = 600;
-canvas.height = 600;
+// Draw meme on canvas
+function drawMeme() {
+    if (!currentImage) return;
 
-// Load templates
-function loadTemplates() {
-    templateGrid.innerHTML = '';
-    memeTemplates.forEach(template => {
-        const templateItem = document.createElement('div');
-        templateItem.className = 'template-item';
-        templateItem.innerHTML = `<img src="${template.src}" alt="${template.name}">`;
-        
-        templateItem.addEventListener('click', () => {
-            document.querySelectorAll('.template-item').forEach(item => item.classList.remove('selected'));
-            templateItem.classList.add('selected');
-            loadImage(template);
-        });
-        
-        templateGrid.appendChild(templateItem);
-    });
+    // Adjust canvas size to match image aspect ratio
+    const maxWidth = 600;
+    const maxHeight = 600;
+    const ratio = Math.min(maxWidth / currentImage.width, maxHeight / currentImage.height);
+    
+    canvas.width = currentImage.width * ratio;
+    canvas.height = currentImage.height * ratio;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw image to fill the entire canvas
+    ctx.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
+
+    // Set text style
+    const fontSize = parseInt(fontSizeInput.value);
+    const fontFamily = fontFamilySelect.value;
+    ctx.font = `bold ${fontSize}px ${fontFamily}`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = textColorInput.value;
+    
+    if (enableStrokeCheckbox.checked) {
+        ctx.strokeStyle = strokeColorInput.value;
+        ctx.lineWidth = parseInt(strokeWidthInput.value);
+    }
+
+    // Calculate text positions based on slider values (convert from percentage to pixels)
+    const topY = (parseInt(topTextPosition.value) / 100) * canvas.height;
+    const bottomY = (parseInt(bottomTextPosition.value) / 100) * canvas.height;
+
+    // Draw top text
+    const topText = topTextInput.value;
+    drawText(topText, canvas.width / 2, topY);
+
+    // Draw bottom text
+    const bottomText = bottomTextInput.value;
+    drawText(bottomText, canvas.width / 2, bottomY);
 }
+
+// Draw text with optional stroke
+function drawText(text, x, y) {
+    if (enableStrokeCheckbox.checked) {
+        ctx.strokeText(text, x, y);
+    }
+    ctx.fillText(text, x, y);
+}
+
+// Event listeners
+[
+    topTextInput, 
+    bottomTextInput,
+    topTextPosition,
+    bottomTextPosition,
+    fontSizeInput, 
+    fontFamilySelect, 
+    textColorInput, 
+    strokeColorInput,
+    strokeWidthInput,
+    enableStrokeCheckbox
+].forEach(input => {
+    input.addEventListener('input', drawMeme);
+});
 
 // Handle custom image upload
 imageUpload.addEventListener('change', (e) => {
@@ -76,58 +125,43 @@ function loadImage(template) {
     currentImage.src = template.src;
 }
 
-// Draw meme on canvas
-function drawMeme() {
-    if (!currentImage) return;
-
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Calculate image dimensions while maintaining aspect ratio
-    const ratio = Math.min(canvas.width / currentImage.width, canvas.height / currentImage.height);
-    const width = currentImage.width * ratio;
-    const height = currentImage.height * ratio;
-    const x = (canvas.width - width) / 2;
-    const y = (canvas.height - height) / 2;
-
-    // Draw image
-    ctx.drawImage(currentImage, x, y, width, height);
-
-    // Set text style
-    const fontSize = parseInt(fontSizeInput.value);
-    const fontFamily = fontFamilySelect.value;
-    ctx.font = `bold ${fontSize}px ${fontFamily}`;
-    ctx.textAlign = 'center';
-    ctx.strokeStyle = strokeColorInput.value;
-    ctx.fillStyle = textColorInput.value;
-    ctx.lineWidth = fontSize / 15;
-
-    // Draw top text
-    const topText = topTextInput.value.toUpperCase();
-    drawText(topText, canvas.width / 2, y + fontSize + 10);
-
-    // Draw bottom text
-    const bottomText = bottomTextInput.value.toUpperCase();
-    drawText(bottomText, canvas.width / 2, y + height - 10);
+// Load templates
+function loadTemplates() {
+    templateGrid.innerHTML = '';
+    memeTemplates.forEach(template => {
+        const templateItem = document.createElement('div');
+        templateItem.className = 'template-item';
+        templateItem.innerHTML = `<img src="${template.src}" alt="${template.name}">`;
+        
+        templateItem.addEventListener('click', () => {
+            document.querySelectorAll('.template-item').forEach(item => item.classList.remove('selected'));
+            templateItem.classList.add('selected');
+            loadImage(template);
+        });
+        
+        templateGrid.appendChild(templateItem);
+    });
 }
-
-// Draw text with stroke
-function drawText(text, x, y) {
-    ctx.strokeText(text, x, y);
-    ctx.fillText(text, x, y);
-}
-
-// Event listeners
-[topTextInput, bottomTextInput, fontSizeInput, fontFamilySelect, textColorInput, strokeColorInput].forEach(input => {
-    input.addEventListener('input', drawMeme);
-});
 
 // Download functionality
 downloadBtn.addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.download = 'meme.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    try {
+        // Create download link
+        const link = document.createElement('a');
+        link.download = 'meme.png';
+        
+        // Convert to blob for better compatibility
+        canvas.toBlob((blob) => {
+            link.href = URL.createObjectURL(blob);
+            link.click();
+            
+            // Clean up
+            URL.revokeObjectURL(link.href);
+        }, 'image/png');
+    } catch (error) {
+        console.error('Ошибка при сохранении:', error);
+        alert('Произошла ошибка при сохранении мема. Попробуйте еще раз.');
+    }
 });
 
 // Initialize
