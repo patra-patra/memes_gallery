@@ -16,8 +16,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Roboto';
-        <link rel="shortcut icon" href="svg/goat.svg">
+    font-family: 'Courier New';
 }
 
 li {
@@ -38,9 +37,11 @@ h1 {
     font-size: 70px;
     -webkit-text-stroke: 1px black;
     opacity: 0;
-    animation: title 3s forwards;
+    animation: title 2s forwards;
+    animation-delay: 2.5s; /* появление начинается с махания */
     line-height: 100%;
 }
+
 h3 {
     margin: 10px 0 5px 0;
 }
@@ -67,17 +68,17 @@ button {
 }
 
 header {
-    margin: 10px 20px;
+    margin: 40px 20px;
 }
 
 .menu {
-    color: white;
+    color: #6f4e38;
     border-radius: 30px;
     display: flex;
     flex-direction: row;
     list-style-type: none;
     justify-content: center;
-    background-color: #50a6e0;
+/*    background-color: #50a6e0;*/
     align-items: center;
     position: relative;
     z-index: 2;
@@ -88,7 +89,7 @@ header {
 }
     .menu li {
         width: calc(100% / 4);
-        border-right: 1px solid gray;
+        border-right: 1px solid #6f4e38;
         margin: 3px 0;
         padding: 10px;
         transition: 0.3s;
@@ -209,7 +210,7 @@ header {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-/*    overflow: hidden;
+    /*    overflow: hidden;
     -webkit-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
     -moz-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
     box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);*/
@@ -217,6 +218,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+    border: 1px groove #50a6e0;
 }
     .card img {
         width: 100%;
@@ -224,6 +226,11 @@ header {
         object-fit: cover;
         border-radius: 8px;
     }
+    .card:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+
 
 .rating {
     display: flex;
@@ -254,7 +261,6 @@ header {
         font-weight: bold;
         font-size: 16px;
     }
-
 
 .modal {
     position: fixed;
@@ -311,10 +317,6 @@ header {
     margin-bottom: 15px;
     font-size: 20px;
 }
-.card:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
-}
 
 .star::before {
     content: "\2605";
@@ -324,29 +326,57 @@ header {
 }
 
 .hero_section {
-    background-color: transparent;
-    height: 500px;
+    background-color: green;
+    height: 700px;
     border-radius: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    padding: 20px;
+    padding: 20px 0 40px 90px;
     display: flex;
-    gap: 30px;
+    gap: 40px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .cat {
     display: flex;
+    height: 80%;
+    max-height: 650px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+.cat1 {
+    display: flex;
     height: 100%;
-    animation: shakeRotate 2s;
+    max-height: 650px;
     transform-origin: bottom;
+    animation: cat1_walk 1.2s ease-out forwards, cat_wave 2s ease-in-out 2s forwards;
+    z-index: 5;
+}
+.cat2 {
+    display: flex;
+    height: 100%;
+    max-height: 650px;
+    transform-origin: bottom;
+    animation: cat2_walk 1.2s ease-out forwards;
+    z-index: 4;
+    opacity: 50%;
+}
+.cat3 {
+    display: flex;
+    height: 100%;
+    max-height: 650px;
+    transform-origin: bottom;
+    opacity: 15%;
 }
 
 .hero_text {
     display: flex;
     flex-direction: column;
     direction: rtl;
+    margin-left: 300px; /* добавлено — сдвигает текст и кнопку вправо */
 }
 
 .hero_section p {
@@ -360,6 +390,7 @@ header {
 .hero_section button {
     opacity: 0;
     animation: button 2s forwards;
+    animation-delay: 2.5s; /* появляется чуть позже */
 }
 
 .search-container {
@@ -381,6 +412,48 @@ header {
     width: 20%;
 }
 
+@keyframes cat1_walk {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(290px); 
+    }
+}
+
+@keyframes cat2_walk {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(155px);
+    }
+}
+
+
+@keyframes cat_wave {
+    0%, 20% {
+        transform: translateX(290px) rotate(0deg);
+    }
+    30% {
+        transform: translateX(290px) rotate(-5deg);
+    }
+    40% {
+        transform: translateX(290px) rotate(5deg);
+    }
+    50% {
+        transform: translateX(290px) rotate(-5deg);
+    }
+    60% {
+        transform: translateX(290px) rotate(5deg);
+    }
+    100% {
+        transform: translateX(290px) rotate(0deg);
+    }
+}
+
 @keyframes button {
 
     60% {
@@ -392,24 +465,28 @@ header {
     }
 }
 
-@keyframes shakeRotate {
+@keyframes move_shakeRotate {
     0% {
-        transform: rotate(0deg);
+        transform: none;
     }
 
-    20% {
-        transform: rotate(-5deg);
-    }
-
-    40% {
-        transform: rotate(5deg);
+    50% {
+        transform: translateX(20px);
     }
 
     60% {
         transform: rotate(-5deg);
     }
 
+    70% {
+        transform: rotate(5deg);
+    }
+
     80% {
+        transform: rotate(-5deg);
+    }
+
+    90% {
         transform: rotate(5deg);
     }
 
