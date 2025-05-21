@@ -157,7 +157,7 @@ button:hover {
 }
 
 header {
-    margin: 40px 20px 35px;
+    margin: 40px 20px 15px;
 }
 
 .menu {
@@ -722,9 +722,16 @@ header {
     z-index: 1;
 }
 
+/* Стили для страницы index.html */
+.index-search {
+    padding: 5px 20px;
+    margin-top: 0;
+}
+
+/* Стили для страницы category.html */
 .category-search {
     padding: 5px 20px;
-    margin-top: -30px;
+    margin-top: 0;
 }
 
 #searchInput {
