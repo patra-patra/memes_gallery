@@ -1,15 +1,18 @@
 ﻿.top-section {
     padding: 40px 20px;
     margin-bottom: 40px;
-    background-color: white;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
     border-radius: 20px;
 }
 
 .top-section h2 {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2em;
-    color: #333;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: var(--primary-color);
+    font-family: "Dela Gothic One", sans-serif;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 .top-memes-grid {
@@ -29,11 +32,13 @@
     border-radius: 15px;
     padding: 15px;
     transition: all 0.3s ease;
-    border: 2px solid #50a6e0;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.1);
 }
 
 .top-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
 }
 
 /* Стили для второй карточки (топ-1) */
@@ -43,9 +48,9 @@
     margin-left: -10px;
     margin-right: -10px;
     z-index: 2;
-    border-color: #ff649d;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    background: linear-gradient(to bottom, #fff 0%, #fff8f8 100%);
+    border-color: #7C3AED;
+    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
+    background: linear-gradient(to bottom, white, rgba(124, 58, 237, 0.05));
 }
 
 .badge {
@@ -53,21 +58,22 @@
     top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    background: #50a6e0;
+    background: var(--primary-color);
     color: white;
     padding: 5px 15px;
     border-radius: 20px;
     font-weight: bold;
     z-index: 1;
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
 }
 
 /* Бейдж для топ-1 */
 .top-card:nth-child(2) .badge {
-    background: #ff649d;
+    background: #7C3AED;
     padding: 10px 25px;
     font-size: 1.3em;
     top: -20px;
-    box-shadow: 0 4px 8px rgba(255, 100, 157, 0.3);
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
 }
 
 .top-card img {
@@ -82,20 +88,21 @@
 /* Изображение для топ-1 */
 .top-card:nth-child(2) img {
     height: 220px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .top-card h3 {
     margin: 10px 0;
     font-size: 1.1em;
     text-align: center;
+    color: var(--primary-color);
 }
 
 /* Заголовок для топ-1 */
 .top-card:nth-child(2) h3 {
     font-size: 1.4em;
     font-weight: bold;
-    color: #ff649d;
+    color: #7C3AED;
 }
 
 .top-card .rating {
@@ -107,46 +114,49 @@
 }
 
 .top-card .rating button {
-    background: #50a6e0;
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 5px 15px;
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
 }
 
 /* Кнопки рейтинга для топ-1 */
 .top-card:nth-child(2) .rating button {
-    background: #ff649d;
+    background: #7C3AED;
     padding: 8px 20px;
     font-size: 1.1em;
+    box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
 }
 
 .top-card .rating button:hover {
-    background: #2980b9;
+    background: var(--accent-color);
     transform: scale(1.05);
 }
 
 .top-card:nth-child(2) .rating button:hover {
-    background: #e0477d;
+    background: var(--accent-color);
 }
 
 .top-card .value {
     font-weight: bold;
     font-size: 1.2em;
+    color: var(--primary-color);
 }
 
 /* Значение рейтинга для топ-1 */
 .top-card:nth-child(2) .value {
     font-size: 1.5em;
-    color: #ff649d;
+    color: #7C3AED;
 }
 
 /* Анимация для топ-1 при наведении */
 .top-card:nth-child(2):hover {
     transform: translateY(-15px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 30px rgba(124, 58, 237, 0.25);
 }
 
 @media (max-width: 768px) {

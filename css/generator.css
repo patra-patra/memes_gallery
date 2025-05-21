@@ -20,24 +20,24 @@
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background: var(--bg-light);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
     border-radius: 20px;
 }
 
 .generator-container h1 {
     text-align: center;
-    color: var(--primary);
+    color: white;
     margin-bottom: 30px;
 }
 
 .generator-grid {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
     background: white;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
 }
 
 /* Upload Section */

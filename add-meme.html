@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить мем | Галерея мемов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/add-meme.css">
+    <link rel="shortcut icon" href="img/vgh.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="generator.html">Генератор</a></li>
+                <li><a href="add-meme.html" class="active">Добавить мем</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="add-meme-container">
+            <h1>Добавить новый мем</h1>
+            
+            <form id="addMemeForm" class="add-meme-form">
+                <div class="form-group">
+                    <label for="memeTitle">Название мема*</label>
+                    <input type="text" id="memeTitle" name="title" required 
+                           placeholder="Придумайте короткое и запоминающееся название">
+                </div>
+
+                <div class="form-group">
+                    <label for="memeDescription">Описание</label>
+                    <textarea id="memeDescription" name="description" rows="3"
+                            placeholder="Опишите контекст мема или его историю"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="memeImage">Изображение мема*</label>
+                    <div class="image-upload-container">
+                        <div class="image-preview" id="imagePreview">
+                            <img id="previewImg" src="" alt="" style="display: none;">
+                            <span class="upload-icon">📸</span>
+                            <span class="upload-text">Нажмите или перетащите изображение</span>
+                        </div>
+                        <input type="file" id="memeImage" name="image" accept="image/*" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="memeTags">Категории мема</label>
+                    <input type="text" id="memeTags" name="tags" 
+                           placeholder="Введите категории через запятую или Enter (например: Коты, IT-мемы, Абсурд)">
+                    <div class="tags-container" id="tagsContainer"></div>
+                </div>
+
+                <div class="form-footer">
+                    <p class="moderation-notice">
+                        * Мем будет добавлен после проверки модератором
+                    </p>
+                    <button type="submit" class="submit-btn">Отправить на модерацию</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div id="notification" class="notification hidden">
+        <span class="notification-message"></span>
+        <button class="notification-close">&times;</button>
+    </div>
+
+    <script src="js/add-meme.js"></script>
+</body>
+</html>

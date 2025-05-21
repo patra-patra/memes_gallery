@@ -126,13 +126,16 @@ function openModal(meme) {
 
     modalImage.src = meme.src;
     modalImage.alt = meme.title;
+    
+    const tagsHtml = meme.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('');
+    
     modalInfo.innerHTML = `
         <div class='title_rating'>
             <h2>${meme.title}</h2>
             <p class="star">${meme.rating}</p>
         </div>
         <p><strong>Год:</strong> ${meme.year || 'Не указано'}</p>
-        <p><strong>Теги:</strong> ${meme.tags.join(', ')}</p>
+        <div class="modal-tags">${tagsHtml}</div>
         <p><strong>Описание:</strong> ${meme.description || 'Описание отсутствует.'}</p>
         <p><strong>Источник:</strong> <a href="${meme.source}" target="_blank">${meme.source}</a></p>
     `;

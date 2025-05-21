@@ -51,11 +51,9 @@ h1 {
     color: white;
     margin-bottom: 20px;
     font-size: 70px;
-    font-family: 'Bangers', cursive;
+    font-family: "Dela Gothic One", sans-serif;
     -webkit-text-stroke: 2px var(--text-color);
-    opacity: 0;
-    animation: title 2s forwards;
-    animation-delay: 2.5s;
+    opacity: 1;
     line-height: 100%;
     letter-spacing: 2px;
     text-shadow: 
@@ -63,9 +61,23 @@ h1 {
         7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
+/* Specific animation only for hero section h1 */
+.hero_section h1 {
+    opacity: 0;
+    animation: title 2s forwards;
+    animation-delay: 2.5s;
+}
+
+/* Style for h1 links */
+h1 a {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
 h3 {
     margin: 10px 0 5px 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: "Dela Gothic One", sans-serif;
     color: var(--text-color);
 }
 
@@ -314,6 +326,31 @@ header {
         margin-bottom: 15px;
     }
 
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 15px 0;
+    justify-content: center;
+}
+
+.modal-tag {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+}
+
+.modal-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(99, 102, 241, 0.3);
+}
+
 .close-button {
     position: absolute;
     right: 15px;
@@ -346,7 +383,8 @@ header {
 
 .hero_section {
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    height: 700px;
+    height: 100vh;
+    min-height: 700px;
     border-radius: 5px;
     display: flex;
     justify-content: start;
@@ -360,35 +398,33 @@ header {
 
 .cat {
     display: flex;
-    height: 80%;
-    max-height: 650px;
+    height: 90vh;
+    max-height: 90vh;
     position: absolute;
     top: 5%;
     left: 5%;
 }
-.cat1 {
+
+.cat1, .cat2, .cat3 {
     display: flex;
     height: 100%;
-    max-height: 650px;
+    max-height: 90vh;
     transform-origin: bottom;
+}
+
+.cat1 {
     animation: cat1_walk 1.2s ease-out forwards, cat_wave 2s ease-in-out 2s forwards;
     z-index: 5;
 }
+
 .cat2 {
-    display: flex;
-    height: 100%;
-    max-height: 650px;
-    transform-origin: bottom;
     animation: cat2_walk 1.2s ease-out forwards;
     z-index: 4;
-    opacity: 50%;
 }
+
 .cat3 {
-    display: flex;
-    height: 100%;
-    max-height: 650px;
-    transform-origin: bottom;
-    opacity: 15%;
+    animation: cat3_walk 1.2s ease-out forwards;
+    z-index: 3;
 }
 
 .hero_text {
@@ -405,6 +441,40 @@ header {
     margin-bottom: 20px;
     text-align: justify;
     font-family: 'Poppins', sans-serif;
+    opacity: 0;
+    animation: text_fade 2s forwards;
+    animation-delay: 2s;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    direction: ltr;
+}
+
+.typing-dot {
+    display: inline-block;
+    opacity: 0;
+    animation: dot_appear 1s forwards;
+    animation-delay: 3s;
+}
+
+@keyframes dot_appear {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes text_fade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero_section button {
@@ -457,9 +527,11 @@ header {
 @keyframes button {
     60% {
         opacity: 0;
+        transform: translateY(20px);
     }
     100% {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -508,6 +580,16 @@ header {
 
     100% {
         transform: translateX(155px);
+    }
+}
+
+@keyframes cat3_walk {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(20px);
     }
 }
 
@@ -568,10 +650,13 @@ header {
     }
     50% {
         opacity: 50%;
+        transform: translateY(20px);    
     }
     100% {
         opacity: 100%;
+        transform: translateY(0);
     }
+    
 }
 
 .memes-section {
