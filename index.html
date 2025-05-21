@@ -29,66 +29,68 @@
         <div class="hero_text">
             <h1 class="dela-gothic-one-regular"><a href="index.html">Галерея<br>мемов</a></h1>
             <!--<p>Добро пожаловать в мир мемов! Здесь вы найдете самые смешные и актуальные мемы из интернета.</p>-->
-            <button>Смотреть мемы</button>
+            <button onclick="document.getElementById('memes-content').scrollIntoView({behavior: 'smooth'})">Смотреть мемы</button>
         </div>
     </section>
 
-    <header id="head">
-        <nav>
-            <ul class="menu">
-                <li>
-                    <a href="#">Животные</a>
-                    <ul>
-                        <li>Коты</li>
-                        <li>Собаки</li>
-                        <li>Другие</li>
-                    </ul>
-                </li>
-                <li>
-                    Абстрактные
-                    <ul>
-                        <li>Ирония</li>
-                        <li>Постирония</li>
-                        <li>Абсурд</li>
-                    </ul>
-                </li>
-                <li>
-                    Локальные
-                    <ul>
-                        <li>Аниме</li>
-                        <li>Игры</li>
-                        <li>IT-мемы</li>
-                    </ul>
-                </li>
-                <li>
-                    Жизненные
-                    <ul>
-                        <li>Студенческие</li>
-                        <li>Бытовые</li>
-                        <li>Офисные</li>
-                        <li>Региональные</li>
-                    </ul>
-                </li>
-                <li><a href="generator.html">Генератор</a></li>
-            </ul>
-        </nav>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Поиск по названию, описанию или тегам..." />
-            <button id="searchButton">
-                <img src="svg/search.svg" alt="Поиск" class="search-icon">
-            </button>
-        </div>
-    </header>
+    <div id="memes-content">
+        <header id="head">
+            <nav>
+                <ul class="menu">
+                    <li>
+                        <a href="#">Животные</a>
+                        <ul>
+                            <li>Коты</li>
+                            <li>Собаки</li>
+                            <li>Другие</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Абстрактные
+                        <ul>
+                            <li>Ирония</li>
+                            <li>Постирония</li>
+                            <li>Абсурд</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Локальные
+                        <ul>
+                            <li>Аниме</li>
+                            <li>Игры</li>
+                            <li>IT-мемы</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Жизненные
+                        <ul>
+                            <li>Студенческие</li>
+                            <li>Бытовые</li>
+                            <li>Офисные</li>
+                            <li>Региональные</li>
+                        </ul>
+                    </li>
+                    <li><a href="generator.html">Генератор</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Поиск по названию, описанию или тегам..." />
+                <button id="searchButton">
+                    <img src="svg/search.svg" alt="Поиск" class="search-icon">
+                </button>
+            </div>
+        </header>
 
-    <main>
-        <div class="container">
-            <section class="top-section">
-                <h2>Топ мемов</h2>
-                <div class="top-memes-grid"></div>
-            </section>
-            <div id="allMemesGrid" class="grid"></div>
-        </div>
-    </main>
+        <main>
+            <div class="container">
+                <section class="top-section">
+                    <h2>Топ мемов</h2>
+                    <div class="top-memes-grid"></div>
+                </section>
+                <div id="allMemesGrid" class="grid"></div>
+            </div>
+        </main>
+    </div>
     <div id="memeModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>

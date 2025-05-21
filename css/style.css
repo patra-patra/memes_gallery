@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'Lobster';
     src: url('fonts/Lobster-Regular.ttf') format('truetype');
     font-weight: normal;
@@ -6,17 +6,33 @@
     font-display: swap;
 }
 
+/* Adding Bangers font for meme-style headings */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 .dela-gothic-one-regular {
-    font-family: "Space Grotesk", sans-serif;
-    font-weight: 600;
+    font-family: "Dela Gothic One", sans-serif;
+    font-weight: 400;
     font-style: normal;
+}
+
+:root {
+    --primary-color: #6366F1;    /* Modern indigo */
+    --secondary-color: #EC4899;  /* Modern pink */
+    --accent-color: #8B5CF6;    /* Modern purple */
+    --background-color: #F9FAFB; /* Light gray background */
+    --text-color: #1F2937;      /* Dark gray text */
+    --light-text: #6B7280;      /* Medium gray text */
 }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Courier New';
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 li {
@@ -28,33 +44,46 @@ a {
 }
 
 body {
-    background-color: #FFEFE5;
+    background-color: var(--background-color);
 }
 
 h1 {
     color: white;
     margin-bottom: 20px;
     font-size: 70px;
-    -webkit-text-stroke: 1px black;
+    font-family: 'Bangers', cursive;
+    -webkit-text-stroke: 2px var(--text-color);
     opacity: 0;
     animation: title 2s forwards;
-    animation-delay: 2.5s; /* появление начинается с махания */
+    animation-delay: 2.5s;
     line-height: 100%;
+    letter-spacing: 2px;
+    text-shadow: 
+        4px 4px 0px var(--text-color),
+        7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
 h3 {
     margin: 10px 0 5px 0;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-color);
 }
 
 button {
-    background-color: #50a6e0;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
 .container {
@@ -62,9 +91,7 @@ button {
     border-radius: 20px;
     margin: 10px 20px;
     height: 100%;
-/*    -webkit-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
-    -moz-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
-    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);*/
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 header {
@@ -72,24 +99,22 @@ header {
 }
 
 .menu {
-    color: #6f4e38;
+    color: var(--text-color);
     border-radius: 30px;
     display: flex;
     flex-direction: row;
     list-style-type: none;
     justify-content: center;
-/*    background-color: #50a6e0;*/
     align-items: center;
     position: relative;
     z-index: 2;
     padding: 0 4px;
-/*    -webkit-box-shadow: 4px 4px 0px 5px rgba(0, 0, 0, 0.56);
-    -moz-box-shadow: 4px 4px 0px 5px rgba(0, 0, 0, 0.56);
-    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);*/
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
     .menu li {
         width: calc(100% / 4);
-        border-right: 1px solid #6f4e38;
+        border-right: 1px solid var(--light-text);
         margin: 3px 0;
         padding: 10px;
         transition: 0.3s;
@@ -110,7 +135,7 @@ header {
         }
 
         .menu li:hover {
-            background-color: #056eb5;
+            background-color: var(--primary-color);
             color: white;
         }
 
@@ -208,17 +233,15 @@ header {
 .card {
     background-color: white;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 12px;
     text-align: center;
-    /*    overflow: hidden;
-    -webkit-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
-    -moz-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
-    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);*/
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    border: 1px groove #50a6e0;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: all 0.3s ease;
 }
     .card img {
         width: 100%;
@@ -227,10 +250,9 @@ header {
         border-radius: 8px;
     }
     .card:hover {
-        transform: scale(1.05);
-        transition: 0.3s;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
-
 
 .rating {
     display: flex;
@@ -241,20 +263,17 @@ header {
 }
     .rating button {
         border: none;
-        background-color: #50a6e0;
+        background-color: var(--primary-color);
         color: white;
         padding: 4px 8px;
         font-size: 16px;
         cursor: pointer;
         border-radius: 5px;
         margin: 0 5px;
-/*        -webkit-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
-        -moz-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);
-        box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.56);*/
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
     }
         .rating button:hover {
-            background-color: #ff649d;
+            background-color: var(--secondary-color);
         }
 
     .rating .value {
@@ -326,7 +345,7 @@ header {
 }
 
 .hero_section {
-    background-color: green;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     height: 700px;
     border-radius: 5px;
     display: flex;
@@ -382,15 +401,66 @@ header {
 .hero_section p {
     width: 280px;
     font-size: 20px;
-    color: #6f4e38;
+    color: white;
     margin-bottom: 20px;
     text-align: justify;
+    font-family: 'Poppins', sans-serif;
 }
 
 .hero_section button {
+    background-size: 200% 200%;
+    background-image: linear-gradient(
+        45deg,
+        var(--primary-color) 0%,
+        var(--accent-color) 25%,
+        var(--secondary-color) 50%,
+        var(--accent-color) 75%,
+        var(--primary-color) 100%
+    );
     opacity: 0;
-    animation: button 2s forwards;
-    animation-delay: 2.5s; /* появляется чуть позже */
+    animation: 
+        button 2s forwards,
+        gradient 8s ease infinite;
+    animation-delay: 2.5s, 4.5s;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero_section button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.hero_section button:active {
+    transform: translateY(1px);
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes button {
+    60% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .search-container {
@@ -405,9 +475,18 @@ header {
     border-radius: 30px;
     margin-right: 5px;
     width: 80%;
-    padding: 2px 10px;
-    border-color: #50a6e0;
+    padding: 8px 16px;
+    border: 2px solid var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
 }
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
 #searchButton {
     width: 20%;
 }
@@ -432,7 +511,6 @@ header {
     }
 }
 
-
 @keyframes cat_wave {
     0%, 20% {
         transform: translateX(290px) rotate(0deg);
@@ -451,17 +529,6 @@ header {
     }
     100% {
         transform: translateX(290px) rotate(0deg);
-    }
-}
-
-@keyframes button {
-
-    60% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 100%;
     }
 }
 
@@ -505,4 +572,8 @@ header {
     100% {
         opacity: 100%;
     }
+}
+
+.memes-section {
+    scroll-margin-top: 20px;
 }
