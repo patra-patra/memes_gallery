@@ -1,11 +1,15 @@
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
     const topMemesGrid = document.querySelector(".top-memes-grid");
     if (!topMemesGrid || typeof memes === "undefined") return;
 
-    // Initialize ratings from database
-    await RatingService.initializeMemeRatings(memes);
+    // Load ratings from localStorage
+    memes.forEach(meme => {
+        const savedRating = localStorage.getItem(`meme_rating_${meme.id}`);
+        if (savedRating !== null) {
+            meme.rating = parseInt(savedRating);
+        }
+    });
 
-    // Function to update top-3 memes
     function updateTopMemes() {
         // Sort memes by rating (descending) and take first 3
         const topMemes = memes
@@ -13,9 +17,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             .sort((a, b) => b.rating - a.rating)
             .slice(0, 3);
 
-        // Swap first and second meme (second becomes first)
-        if (topMemes.length > 1) {
-            [topMemes[0], topMemes[1]] = [topMemes[1], topMemes[0]];
+        // Arrange cards: #2, #1, #3
+        if (topMemes.length === 3) {
+            const [first, second, third] = topMemes;
+            topMemes[0] = second; // #2 место слева
+            topMemes[1] = first;  // #1 место в центре
+            topMemes[2] = third;  // #3 место справа
         }
 
         // Clear container
@@ -24,14 +31,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Create cards for top-3 memes with positions
         topMemes.forEach((meme, index) => {
             const card = document.createElement("div");
-            card.className = `card top-${index + 1}`;
+            card.className = 'top-card';
             
-            if (index === 0) {
-                card.classList.add("center-card");
-            }
-
+            // Определяем номер места для бейджа
+            const position = index === 0 ? 2 : (index === 1 ? 1 : 3);
+            
             card.innerHTML = `
-                <div class="badge">#${index + 1}</div>
+                <div class="badge">#${position}</div>
                 <img src="${meme.src}" alt="${meme.title}">
                 <div class="rating" data-id="${meme.id}">
                     <button class="minus">−</button>
@@ -41,50 +47,62 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <h3>${meme.title}</h3>
             `;
 
-            topMemesGrid.appendChild(card);
-
-            // Subscribe to rating changes
-            RatingService.onRatingChange(meme.id, (newRating) => {
-                const ratingSpan = card.querySelector('.value');
-                if (ratingSpan) {
-                    ratingSpan.textContent = newRating;
-                    meme.rating = newRating;
-                    // Update top memes when rating changes
-                    updateTopMemes();
+            // Click on card - open modal
+            card.addEventListener("click", (e) => {
+                if (!e.target.closest('.rating')) {
+                    openModal(meme);
                 }
             });
+
+            topMemesGrid.appendChild(card);
         });
 
-        // Add rating button handlers
+        // Rating button handlers
         topMemesGrid.querySelectorAll(".rating").forEach((ratingDiv) => {
             const id = ratingDiv.getAttribute("data-id");
             const valueSpan = ratingDiv.querySelector(".value");
             const plusBtn = ratingDiv.querySelector(".plus");
             const minusBtn = ratingDiv.querySelector(".minus");
 
-            plusBtn.addEventListener("click", async () => {
+            function updateRating(newRating) {
                 const meme = memes.find((m) => m.id === id);
                 if (meme) {
-                    const newRating = meme.rating + 1;
-                    const success = await RatingService.updateRating(id, newRating);
-                    if (success) {
-                        meme.rating = newRating;
-                        valueSpan.textContent = newRating;
-                        updateTopMemes();
+                    meme.rating = newRating;
+                    localStorage.setItem(`meme_rating_${id}`, newRating);
+
+                    // Update rating in all instances of this meme
+                    document.querySelectorAll(`.rating[data-id="${id}"] .value`).forEach(span => {
+                        span.textContent = newRating;
+                    });
+
+                    // Update rating in modal if it's open
+                    const modalInfo = document.getElementById("modalInfo");
+                    if (modalInfo && !modalInfo.closest('.hidden')) {
+                        const modalRating = modalInfo.querySelector('.star');
+                        if (modalRating && modalRating.closest('.title_rating')?.querySelector('h2')?.textContent === meme.title) {
+                            modalRating.textContent = newRating;
+                        }
                     }
+
+                    // Refresh top memes order
+                    updateTopMemes();
+                }
+            }
+
+            plusBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const meme = memes.find((m) => m.id === id);
+                if (meme) {
+                    updateRating(meme.rating + 1);
                 }
             });
 
-            minusBtn.addEventListener("click", async () => {
+            minusBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 const meme = memes.find((m) => m.id === id);
                 if (meme) {
-                    const newRating = meme.rating - 1;
-                    const success = await RatingService.updateRating(id, newRating);
-                    if (success) {
-                        meme.rating = newRating;
-                        valueSpan.textContent = newRating;
-                        updateTopMemes();
-                    }
+                    const newRating = Math.max(0, meme.rating - 1);
+                    updateRating(newRating);
                 }
             });
         });

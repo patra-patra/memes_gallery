@@ -1,6 +1,176 @@
-﻿.top-memes-grid {
+﻿.top-section {
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.top-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: #333;
+}
+
+.top-memes-grid {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+    position: relative;
+}
+
+.top-card {
+    position: relative;
+    width: 220px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid #50a6e0;
+}
+
+.top-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Стили для второй карточки (топ-1) */
+.top-card:nth-child(2) {
+    width: 300px;
+    margin-top: -40px;
+    margin-left: -10px;
+    margin-right: -10px;
+    z-index: 2;
+    border-color: #ff649d;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    background: linear-gradient(to bottom, #fff 0%, #fff8f8 100%);
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #50a6e0;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Бейдж для топ-1 */
+.top-card:nth-child(2) .badge {
+    background: #ff649d;
+    padding: 10px 25px;
+    font-size: 1.3em;
+    top: -20px;
+    box-shadow: 0 4px 8px rgba(255, 100, 157, 0.3);
+}
+
+.top-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Изображение для топ-1 */
+.top-card:nth-child(2) img {
+    height: 220px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.top-card h3 {
+    margin: 10px 0;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+/* Заголовок для топ-1 */
+.top-card:nth-child(2) h3 {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ff649d;
+}
+
+.top-card .rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.top-card .rating button {
+    background: #50a6e0;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Кнопки рейтинга для топ-1 */
+.top-card:nth-child(2) .rating button {
+    background: #ff649d;
+    padding: 8px 20px;
+    font-size: 1.1em;
+}
+
+.top-card .rating button:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+.top-card:nth-child(2) .rating button:hover {
+    background: #e0477d;
+}
+
+.top-card .value {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Значение рейтинга для топ-1 */
+.top-card:nth-child(2) .value {
+    font-size: 1.5em;
+    color: #ff649d;
+}
+
+/* Анимация для топ-1 при наведении */
+.top-card:nth-child(2):hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    .top-memes-grid {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .top-card, .top-card:nth-child(2) {
+        width: 100%;
+        max-width: 300px;
+        margin: 20px auto;
+    }
+
+    .top-card img, .top-card:nth-child(2) img {
+        height: 200px;
+    }
+
+    /* Сохраняем выделение топ-1 на мобильных */
+    .top-card:nth-child(2) {
+        transform: scale(1.05);
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
 }
 
 .search-container {
