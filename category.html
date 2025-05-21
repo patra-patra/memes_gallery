@@ -7,19 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
-    <style>
-        #head h1 {
-            text-align: center;
-            margin: 20px auto 40px auto;
-        }
-        #categoryTitle {
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="css/category.css" />
 </head>
 <body>
     <header id="head">
-        <h1><a href="index.html">Галерея мемов</a></h1>
+        <div class="header-logo">
+            <img src="img/vgh.png">
+            <h1 class="logo"><a href="index.html">Галерея мемов</a></h1>
+        </div>
         <nav>
             <ul class="menu">
                 <li>
@@ -61,7 +56,15 @@
         </nav>
     </header>
 
-    <main>
+    <div class="search-container category-search">
+        <input type="text" id="searchInput" placeholder="Поиск по названию, описанию или тегам..." />
+        <button id="searchButton">
+            <img src="svg/search.svg" alt="Поиск" class="search-icon">
+        </button>
+    </div>
+
+
+    <section class="category-hero">
         <div class="container">
             <div class="breadcrumbs">
                 <a href="index.html">Главная</a>
@@ -69,6 +72,12 @@
                 <span id="categoryBreadcrumb"></span>
             </div>
             <h2 id="categoryTitle">Категория</h2>
+            <p class="category-description">Исследуйте лучшие мемы в этой категории, отсортированные по популярности и актуальности. Находите новые форматы и делитесь своими любимыми мемами.</p>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
             <div class="filters-panel">
                 <div class="filters-header">
                     <h3>Фильтры и сортировка</h3>
