@@ -1279,6 +1279,21 @@ header {
     -ms-overflow-style: none; /* IE and Edge */
 }
 
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-logo img {
+    height: 100px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .breadcrumbs::-webkit-scrollbar {
     display: none;
@@ -1334,65 +1349,135 @@ header {
     align-items: center;
 }
 
-@media (max-width: 1024px) {
+
+@media (max-width: 768px) {
+    .header-logo img {
+        height: 70px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    
+    .logo {
+        font-size: 36px;
+    }
+    
+    #categoryTitle {
+        font-size: 42px;
+    }
+    
+    .category-description {
+        font-size: 16px;
+    }
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 480px) {
+    .header-logo {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .header-logo img {
+        height: 60px;
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    
+    .logo {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    
+    #categoryTitle {
+        font-size: 32px;
+        margin: 20px 0;
+    }
+    
+    #categoryTitle::after {
+        width: 60px;
+        height: 3px;
+        bottom: -5px;
+    }
+    
+    .category-description {
+        font-size: 15px;
+    }
+}
+
+/* Категория hero */
+.category-hero {
+    background-color: white;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .category-hero {
+        padding: 20px 0;
+    }
+
+    .search-container input {
+        width: 100%;
+    }
+
+    h1 {
+        -webkit-text-stroke: 1px var(--text-color);
+    }
+}
+
+@media (max-width: 670px) {
+    .filters-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-hero {
+        padding: 15px 0;
+    }
+    
+    .category-hero .container {
+        padding: 0 15px;
+    }
+}
+
+/* Хлебные крошки */
+.breadcrumbs {
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .breadcrumbs {
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+@media (max-width: 1261px) {
+
     .hero_section {
         display: none;
     }
-    
-   
+    .header-logo {
+        display: flex;
+    }
 }
 
-
-.hero_section h1 {
-    font-size: clamp(36px, 8vw, 70px);
-    margin: 2vw 0;
-    -webkit-text-stroke: clamp(1px, 0.2vw, 2px) var(--text-color);
-    text-shadow: 
-        clamp(2px, 0.6vw, 4px) clamp(2px, 0.6vw, 4px) 0 var(--text-color),
-        clamp(3px, 1vw, 7px) clamp(3px, 1vw, 7px) 0 rgba(0, 0, 0, 0.2);
-    line-height: 1.1;
-}
-
-.hero_section p {
-    font-size: clamp(14px, 2.5vw, 20px);
-    margin-bottom: clamp(15px, 4vw, 25px);
-    line-height: 1.5;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.hero_section button {
-    padding: clamp(10px, 2vw, 15px) clamp(20px, 4vw, 30px);
-    font-size: clamp(14px, 2.5vw, 18px);
-    border-radius: clamp(20px, 4vw, 30px);
-}
-
-/* Горизонтальная ориентация для широких экранов */
-@media (min-width: 768px) and (min-aspect-ratio: 1/1) {
+@media (min-width: 1262px) {
     .hero_section {
-        flex-direction: row;
-        gap: clamp(20px, 5vw, 40px);
+        display: flex;
     }
     
-    .hero_text {
-        text-align: left;
-        margin-left: clamp(20px, 5vw, 40px);
+    .header-logo {
+        display: none;
     }
-    
-    .hero_section p {
-        margin-left: 0;
-        margin-right: 0;
-        text-align: left;
-    }
-}
-
-/* Большие экраны - показываем всех котиков */
-
-
-/* Анимации */
-@keyframes cat_wave {
-    0% { transform: rotate(-5deg) scale(1); }
-    50% { transform: rotate(5deg) scale(1.05); }
-    100% { transform: rotate(-5deg) scale(1); }
+   
 }
