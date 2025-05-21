@@ -2,60 +2,82 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Галерея мемов</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мемогенератор</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generator.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header id="head">
-        <h1><a href="index.html">Галерея мемов</a></h1>
+    <header>
         <nav>
-            <ul class="menu">
-                <li>
-                    <a href="#">Животные</a>
-                    <ul>
-                        <li>Коты</li>
-                        <li>Собаки</li>
-                        <li>Другие</li>
-                    </ul>
-                </li>
-                <li>
-                    Абстрактные
-                    <ul>
-                        <li>Ирония</li>
-                        <li>Постирония</li>
-                        <li>Абсурд</li>
-                    </ul>
-                </li>
-                <li>
-                    Локальные
-                    <ul>
-                        <li>Аниме</li>
-                        <li>Игры</li>
-                        <li>IT-мемы</li>
-                    </ul>
-                </li>
-                <li>
-                    Жизненные
-                    <ul>
-                        <li>Студенческие</li>
-                        <li>Бытовые</li>
-                        <li>Офисные</li>
-                        <li>Региональные</li>
-                    </ul>
-                </li>
-                <li>Генератор</li>
-            </ul>
+            <a href="index.html">Главная</a>
+            <a href="category.html">Категории</a>
+            <a href="generator.html" class="active">Мемогенератор</a>
         </nav>
     </header>
 
     <main>
-        <div class="container">
-            <h2>Все мемы</h2>
-            <div id="allMemesGrid" class="grid"></div>
+        <div class="generator-container">
+            <h1>Создай свой мем</h1>
+            
+            <div class="generator-grid">
+                <div class="template-section">
+                    <h2>Выбери шаблон</h2>
+                    <div class="upload-section">
+                        <label for="imageUpload" class="upload-btn">
+                            Загрузить свое изображение
+                            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        </label>
+                    </div>
+                    <div class="template-grid" id="templateGrid">
+                        <!-- Templates will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="editor-section">
+                    <div class="canvas-container">
+                        <canvas id="memeCanvas"></canvas>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="text-controls">
+                            <input type="text" id="topText" placeholder="Верхний текст">
+                            <input type="text" id="bottomText" placeholder="Нижний текст">
+                        </div>
+                        
+                        <div class="style-controls">
+                            <div class="control-group">
+                                <label>Размер текста:</label>
+                                <input type="range" id="fontSize" min="20" max="60" value="40">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label>Шрифт:</label>
+                                <select id="fontFamily">
+                                    <option value="Impact">Impact</option>
+                                    <option value="Lobster">Lobster</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label>Цвет текста:</label>
+                                <input type="color" id="textColor" value="#ffffff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label>Обводка:</label>
+                                <input type="color" id="strokeColor" value="#000000">
+                            </div>
+                        </div>
+                        
+                        <button id="downloadBtn" class="download-btn">Скачать мем</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <script src="script.js"></script>
-
+    <script src="js/generator.js"></script>
 </body>
 </html>
