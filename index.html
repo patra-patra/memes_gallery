@@ -38,36 +38,36 @@
             <nav>
                 <ul class="menu">
                     <li>
-                        <a href="#">Животные</a>
+                        <a href="category.html?category=animals">Животные</a>
                         <ul>
-                            <li>Коты</li>
-                            <li>Собаки</li>
-                            <li>Другие</li>
+                            <li><a href="category.html?category=animals&subcategory=cats">Коты</a></li>
+                            <li><a href="category.html?category=animals&subcategory=dogs">Собаки</a></li>
+                            <li><a href="category.html?category=animals&subcategory=other">Другие</a></li>
                         </ul>
                     </li>
                     <li>
-                        Абстрактные
+                        <a href="category.html?category=abstract">Абстрактные</a>
                         <ul>
-                            <li>Ирония</li>
-                            <li>Постирония</li>
-                            <li>Абсурд</li>
+                            <li><a href="category.html?category=abstract&subcategory=irony">Ирония</a></li>
+                            <li><a href="category.html?category=abstract&subcategory=postirony">Постирония</a></li>
+                            <li><a href="category.html?category=abstract&subcategory=absurd">Абсурд</a></li>
                         </ul>
                     </li>
                     <li>
-                        Локальные
+                        <a href="category.html?category=local">Локальные</a>
                         <ul>
-                            <li>Аниме</li>
-                            <li>Игры</li>
-                            <li>IT-мемы</li>
+                            <li><a href="category.html?category=local&subcategory=anime">Аниме</a></li>
+                            <li><a href="category.html?category=local&subcategory=games">Игры</a></li>
+                            <li><a href="category.html?category=local&subcategory=it">IT-мемы</a></li>
                         </ul>
                     </li>
                     <li>
-                        Жизненные
+                        <a href="category.html?category=life">Жизненные</a>
                         <ul>
-                            <li>Студенческие</li>
-                            <li>Бытовые</li>
-                            <li>Офисные</li>
-                            <li>Региональные</li>
+                            <li><a href="category.html?category=life&subcategory=student">Студенческие</a></li>
+                            <li><a href="category.html?category=life&subcategory=household">Бытовые</a></li>
+                            <li><a href="category.html?category=life&subcategory=office">Офисные</a></li>
+                            <li><a href="category.html?category=life&subcategory=regional">Региональные</a></li>
                         </ul>
                     </li>
                     <li><a href="generator.html">Генератор</a></li>
@@ -137,6 +137,48 @@
             </div>
         </main>
     </div>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>О проекте</h4>
+                <p>Галерея мемов - это коллекция самых популярных и интересных мемов. Здесь вы можете найти, оценить или добавить свои любимые мемы.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="generator.html">Генератор мемов</a></li>
+                    <li><a href="add-meme.html">Добавить мем</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Категории</h4>
+                <ul>
+                    <li><a href="#">Животные</a></li>
+                    <li><a href="#">Абстрактные</a></li>
+                    <li><a href="#">Локальные</a></li>
+                    <li><a href="#">Жизненные</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Связаться с нами</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <img src="svg/telegram.svg" alt="Telegram">
+                    </a>
+                    <a href="#" class="social-link">
+                        <img src="svg/vk.svg" alt="VK">
+                    </a>
+                    <a href="#" class="social-link">
+                        <img src="svg/github.svg" alt="GitHub">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Галерея мемов. Все права защищены.</p>
+        </div>
+    </footer>
     <div id="memeModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button">&times;</span>

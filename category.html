@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <title>Категория мемов</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <style>
+        #head h1 {
+            text-align: center;
+            margin: 20px auto 40px auto;
+        }
+        #categoryTitle {
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header id="head">
@@ -11,36 +23,36 @@
         <nav>
             <ul class="menu">
                 <li>
-                    Животные
+                    <a href="category.html?category=animals">Животные</a>
                     <ul>
-                        <li>Коты</li>
-                        <li>Собаки</li>
-                        <li>Другие</li>
+                        <li><a href="category.html?category=animals&subcategory=cats">Коты</a></li>
+                        <li><a href="category.html?category=animals&subcategory=dogs">Собаки</a></li>
+                        <li><a href="category.html?category=animals&subcategory=other">Другие</a></li>
                     </ul>
                 </li>
                 <li>
-                    Абстрактные
+                    <a href="category.html?category=abstract">Абстрактные</a>
                     <ul>
-                        <li>Ирония</li>
-                        <li>Постирония</li>
-                        <li>Абсурд</li>
+                        <li><a href="category.html?category=abstract&subcategory=irony">Ирония</a></li>
+                        <li><a href="category.html?category=abstract&subcategory=postirony">Постирония</a></li>
+                        <li><a href="category.html?category=abstract&subcategory=absurd">Абсурд</a></li>
                     </ul>
                 </li>
                 <li>
-                    Локальные
+                    <a href="category.html?category=local">Локальные</a>
                     <ul>
-                        <li>Аниме</li>
-                        <li>Игры</li>
-                        <li>IT-мемы</li>
+                        <li><a href="category.html?category=local&subcategory=anime">Аниме</a></li>
+                        <li><a href="category.html?category=local&subcategory=games">Игры</a></li>
+                        <li><a href="category.html?category=local&subcategory=it">IT-мемы</a></li>
                     </ul>
                 </li>
                 <li>
-                    Жизненные
+                    <a href="category.html?category=life">Жизненные</a>
                     <ul>
-                        <li>Студенческие</li>
-                        <li>Бытовые</li>
-                        <li>Офисные</li>
-                        <li>Региональные</li>
+                        <li><a href="category.html?category=life&subcategory=student">Студенческие</a></li>
+                        <li><a href="category.html?category=life&subcategory=household">Бытовые</a></li>
+                        <li><a href="category.html?category=life&subcategory=office">Офисные</a></li>
+                        <li><a href="category.html?category=life&subcategory=regional">Региональные</a></li>
                     </ul>
                 </li>
                 <li><a href="generator.html">Генератор</a></li>
@@ -51,16 +63,55 @@
 
     <main>
         <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a>
+                <span class="breadcrumb-separator">›</span>
+                <span id="categoryBreadcrumb"></span>
+            </div>
             <h2 id="categoryTitle">Категория</h2>
-            <div class="filter-container">
-                <button class="filter-button" data-sort="rating">
-                    По рейтингу
-                    <span class="icon">↑</span>
-                </button>
-                <button class="filter-button" data-sort="title">
-                    По алфавиту
-                    <span class="icon">↑</span>
-                </button>
+            <div class="filters-panel">
+                <div class="filters-header">
+                    <h3>Фильтры и сортировка</h3>
+                    <button class="filter-reset">Сбросить</button>
+                </div>
+                <div class="filters-content">
+                    <div class="sort-buttons">
+                        <button class="filter-button" data-sort="rating">
+                            По рейтингу
+                            <span class="icon">↑</span>
+                        </button>
+                        <button class="filter-button" data-sort="title">
+                            По алфавиту
+                            <span class="icon">↑</span>
+                        </button>
+                        <button class="filter-button" data-sort="year">
+                            По году
+                            <span class="icon">↑</span>
+                        </button>
+                    </div>
+                    <div class="filter-options">
+                        <div class="filter-group">
+                            <label>Год:</label>
+                            <select id="yearFilter">
+                                <option value="">Все годы</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Рейтинг:</label>
+                            <select id="ratingFilter">
+                                <option value="">Любой рейтинг</option>
+                                <option value="1000">1000+</option>
+                                <option value="500">500+</option>
+                                <option value="100">100+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="grid" id="memeGrid"></div>
         </div>
@@ -70,7 +121,28 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <img id="modalImage" src="" alt="">
-            <div id="modalInfo"></div>
+            <div id="modalInfo">
+                <div class="title_rating">
+                    <h2>Название мема</h2>
+                    <div class="star">★ <span class="rating-value">0</span></div>
+                </div>
+                <div class="modal-info-row">
+                    <strong>Источник:</strong>
+                    <a href="https://reddit.com/r/memes" target="_blank">r/memes</a>
+                </div>
+                <div class="modal-info-row">
+                    <strong>Первое появление:</strong>
+                    <a href="https://knowyourmeme.com" target="_blank">Know Your Meme</a>
+                </div>
+                <div class="modal-info-row">
+                    <strong>Теги:</strong>
+                    <div class="modal-tags">
+                        <a href="#" class="modal-tag">Животные</a>
+                        <a href="#" class="modal-tag">Коты</a>
+                        <a href="#" class="modal-tag">Милота</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

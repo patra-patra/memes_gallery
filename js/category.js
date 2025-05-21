@@ -1,37 +1,144 @@
 // category.js
-// Обработка клика в меню — уже есть в script.js, дублируется здесь для надёжности
-document.querySelectorAll(".menu li ul li").forEach((item) => {
-    item.addEventListener("click", () => {
-        const category = item.textContent.trim();
-        localStorage.setItem("selectedCategory", category);
-        window.location.href = "category.html";
-    });
-});
+
+// Функция для определения категории и подкатегории по тегу
+function getCategoryAndSubcategory(tag) {
+    const categoryMap = {
+        'Коты': { category: 'animals', subcategory: 'cats' },
+        'Кошки': { category: 'animals', subcategory: 'cats' },
+        'Собаки': { category: 'animals', subcategory: 'dogs' },
+        'Другие': { category: 'animals', subcategory: 'other' },
+        'Ирония': { category: 'abstract', subcategory: 'irony' },
+        'Постирония': { category: 'abstract', subcategory: 'postirony' },
+        'Абсурд': { category: 'abstract', subcategory: 'absurd' },
+        'Аниме': { category: 'local', subcategory: 'anime' },
+        'Игры': { category: 'local', subcategory: 'games' },
+        'IT-мемы': { category: 'local', subcategory: 'it' },
+        'Студенческие': { category: 'life', subcategory: 'student' },
+        'Бытовые': { category: 'life', subcategory: 'household' },
+        'Офисные': { category: 'life', subcategory: 'office' },
+        'Региональные': { category: 'life', subcategory: 'regional' },
+        'Животные': { category: 'animals' }
+    };
+
+    return categoryMap[tag] || null;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    const currentPage = window.location.pathname;
-    if (!currentPage.includes("category.html")) return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    const subcategory = urlParams.get('subcategory');
 
-    const selectedCategory = localStorage.getItem("selectedCategory");
-    const title = document.getElementById("categoryTitle");
-    const grid = document.getElementById("memeGrid");
-    if (!selectedCategory || !grid || typeof memes === "undefined") return;
-
-    // Load ratings from localStorage
-    memes.forEach(meme => {
-        const savedRating = localStorage.getItem(`meme_rating_${meme.id}`);
-        if (savedRating !== null) {
-            meme.rating = parseInt(savedRating);
+    // Объект с названиями категорий
+    const categoryNames = {
+        animals: {
+            name: 'Животные',
+            subcategories: {
+                cats: 'Коты',
+                dogs: 'Собаки',
+                other: 'Другие'
+            }
+        },
+        abstract: {
+            name: 'Абстрактные',
+            subcategories: {
+                irony: 'Ирония',
+                postirony: 'Постирония',
+                absurd: 'Абсурд'
+            }
+        },
+        local: {
+            name: 'Локальные',
+            subcategories: {
+                anime: 'Аниме',
+                games: 'Игры',
+                it: 'IT-мемы'
+            }
+        },
+        life: {
+            name: 'Жизненные',
+            subcategories: {
+                student: 'Студенческие',
+                household: 'Бытовые',
+                office: 'Офисные',
+                regional: 'Региональные'
+            }
         }
-    });
+    };
 
-    title.textContent = `Категория: ${selectedCategory}`;
-    const filteredMemes = memes.filter((m) =>
-        m.tags.includes(selectedCategory)
-    );
+    // Обновляем заголовок страницы и хлебные крошки
+    const categoryTitle = document.getElementById('categoryTitle');
+    const categoryBreadcrumb = document.getElementById('categoryBreadcrumb');
+
+    if (category && categoryNames[category]) {
+        if (subcategory && categoryNames[category].subcategories[subcategory]) {
+            // Если есть подкатегория
+            categoryTitle.textContent = categoryNames[category].subcategories[subcategory];
+            categoryBreadcrumb.innerHTML = `
+                <a href="category.html?category=${category}" class="breadcrumb-category">${categoryNames[category].name}</a>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-current">${categoryNames[category].subcategories[subcategory]}</span>
+            `;
+        } else {
+            // Если только основная категория
+            categoryTitle.textContent = categoryNames[category].name;
+            categoryBreadcrumb.innerHTML = `
+                <span class="breadcrumb-current">${categoryNames[category].name}</span>
+            `;
+        }
+    } else {
+        categoryTitle.textContent = 'Категория не найдена';
+        categoryBreadcrumb.innerHTML = `
+            <span class="breadcrumb-current">Категория не найдена</span>
+        `;
+    }
+
+    // Фильтруем мемы по категории и подкатегории
+    function filterMemesByCategory(memes) {
+        if (!category || !categoryNames[category]) return [];
+
+        const categoryName = categoryNames[category].name;
+        const subcategoryName = subcategory ? categoryNames[category].subcategories[subcategory] : null;
+
+        // Объект с альтернативными названиями тегов
+        const tagAliases = {
+            'cats': ['Коты', 'Кошки']
+        };
+
+        return memes.filter(meme => {
+            if (!meme.tags) return false;
+            
+            if (subcategoryName) {
+                // Если выбрана подкатегория
+                if (subcategory === 'cats') {
+                    // Для котов проверяем оба варианта тегов
+                    return tagAliases.cats.some(tag => meme.tags.includes(tag));
+                }
+                // Для остальных подкатегорий
+                return meme.tags.includes(subcategoryName);
+            } else {
+                // Если выбрана основная категория
+                const subcategoryNames = Object.values(categoryNames[category].subcategories);
+                
+                // Проверяем основную категорию
+                if (meme.tags.includes(categoryName)) return true;
+                
+                // Проверяем подкатегории с учетом альтернативных названий
+                return subcategoryNames.some(subcat => {
+                    if (subcat === 'Коты') {
+                        return tagAliases.cats.some(tag => meme.tags.includes(tag));
+                    }
+                    return meme.tags.includes(subcat);
+                });
+            }
+        });
+    }
+
+    // Отображаем мемы
+    const grid = document.getElementById('memeGrid');
+    const filteredMemes = filterMemesByCategory(memes);
 
     if (filteredMemes.length === 0) {
-        grid.innerHTML = `<p>Нет мемов в категории "${selectedCategory}".</p>`;
+        grid.innerHTML = '<div class="no-results">В этой категории пока нет мемов</div>';
         return;
     }
 
@@ -111,6 +218,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // Инициализируем обработчики рейтинга
+    if (typeof initializeEasterEgg === 'function') {
+        document.querySelectorAll('.rating').forEach(initializeEasterEgg);
+    }
 });
 
 // Modal opening function
@@ -127,11 +239,16 @@ function openModal(meme) {
     modalImage.src = meme.src;
     modalImage.alt = meme.title;
     
-    const tagsHtml = meme.tags.map(tag => `
-        <a href="category.html" class="modal-tag" onclick="localStorage.setItem('selectedCategory', '${tag}')">
-            <span>${tag}</span>
-        </a>
-    `).join('');
+    const tagsHtml = meme.tags.map(tag => {
+        const categoryInfo = getCategoryAndSubcategory(tag);
+        if (categoryInfo) {
+            const url = categoryInfo.subcategory 
+                ? `category.html?category=${categoryInfo.category}&subcategory=${categoryInfo.subcategory}`
+                : `category.html?category=${categoryInfo.category}`;
+            return `<a href="${url}" class="modal-tag"><span>${tag}</span></a>`;
+        }
+        return `<span class="modal-tag"><span>${tag}</span></span>`;
+    }).join('');
     
     modalInfo.innerHTML = `
         <div class='title_rating'>

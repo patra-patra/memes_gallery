@@ -1,9 +1,7 @@
 // отвечает только за выбор категории и переход на category.html
-document.querySelectorAll(".menu li ul li").forEach((item) => {
-    item.addEventListener("click", () => {
-        const category = item.textContent.trim();
-        localStorage.setItem("selectedCategory", category);
-        window.location.href = "category.html";
+document.querySelectorAll(".menu li ul li a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+        e.stopPropagation(); // Предотвращаем всплытие события
     });
 });
 
@@ -16,6 +14,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // Для index.html скрипт index.js
 });
 
+// Для обратной совместимости с модальным окном
+function getCategoryAndSubcategory(tag) {
+    const categoryMap = {
+        'Коты': { category: 'animals', subcategory: 'cats' },
+        'Кошки': { category: 'animals', subcategory: 'cats' },
+        'Собаки': { category: 'animals', subcategory: 'dogs' },
+        'Другие': { category: 'animals', subcategory: 'other' },
+        'Ирония': { category: 'abstract', subcategory: 'irony' },
+        'Постирония': { category: 'abstract', subcategory: 'postirony' },
+        'Абсурд': { category: 'abstract', subcategory: 'absurd' },
+        'Аниме': { category: 'local', subcategory: 'anime' },
+        'Игры': { category: 'local', subcategory: 'games' },
+        'IT-мемы': { category: 'local', subcategory: 'it' },
+        'Студенческие': { category: 'life', subcategory: 'student' },
+        'Бытовые': { category: 'life', subcategory: 'household' },
+        'Офисные': { category: 'life', subcategory: 'office' },
+        'Региональные': { category: 'life', subcategory: 'regional' },
+        'Животные': { category: 'animals' }
+    };
+
+    return categoryMap[tag] || null;
+}
+
+// Обновляем обработчик клика по тегам в модальном окне
 function openModal(meme) {
     const modal = document.getElementById("memeModal");
     const modalImage = document.getElementById("modalImage");
@@ -29,11 +51,16 @@ function openModal(meme) {
     modalImage.src = meme.src;
     modalImage.alt = meme.title;
     
-    const tagsHtml = meme.tags.map(tag => `
-        <a href="category.html" class="modal-tag" onclick="localStorage.setItem('selectedCategory', '${tag}')">
-            <span>${tag}</span>
-        </a>
-    `).join('');
+    const tagsHtml = meme.tags.map(tag => {
+        const categoryInfo = getCategoryAndSubcategory(tag);
+        if (categoryInfo) {
+            const url = categoryInfo.subcategory 
+                ? `category.html?category=${categoryInfo.category}&subcategory=${categoryInfo.subcategory}`
+                : `category.html?category=${categoryInfo.category}`;
+            return `<a href="${url}" class="modal-tag"><span>${tag}</span></a>`;
+        }
+        return `<span class="modal-tag"><span>${tag}</span></span>`;
+    }).join('');
     
     modalInfo.innerHTML = `
         <div class='title_rating'>
