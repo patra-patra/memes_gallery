@@ -1,4 +1,4 @@
-﻿@font-face {
+@font-face {
     font-family: 'Lobster';
     src: url('fonts/Lobster-Regular.ttf') format('truetype');
     font-weight: normal;
@@ -7,8 +7,8 @@
 }
 
 .dela-gothic-one-regular {
-    font-family: "Dela Gothic One", sans-serif;
-    font-weight: 400;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
     font-style: normal;
 }
 
