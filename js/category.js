@@ -127,7 +127,11 @@ function openModal(meme) {
     modalImage.src = meme.src;
     modalImage.alt = meme.title;
     
-    const tagsHtml = meme.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('');
+    const tagsHtml = meme.tags.map(tag => `
+        <a href="category.html" class="modal-tag" onclick="localStorage.setItem('selectedCategory', '${tag}')">
+            <span>${tag}</span>
+        </a>
+    `).join('');
     
     modalInfo.innerHTML = `
         <div class='title_rating'>
